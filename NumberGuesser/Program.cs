@@ -17,6 +17,9 @@ namespace NumberGuesser
                 If the guess is correct, the program should tell you that you win and then quit.
                 After 5 incorrect guesses, the program should tell you that you lose.
                 You should display all the guesses to the screen */
+            Random randomNumber = new Random();
+            int rangedRandomNumber = randomNumber.Next(0, 100);
+
             Console.Write("Please guess a number between 1 and 100: ");
             string guessedNumber = Console.ReadLine();
             int parsedNumber = 0;
@@ -24,13 +27,13 @@ namespace NumberGuesser
             if (int.TryParse(guessedNumber, out parsedNumber))
             {
                 Console.Write($"You guessed {parsedNumber}. ");
-                if (parsedNumber < randomNumber)
+                if (parsedNumber < rangedRandomNumber)
                 {
                     Console.Write($"{parsedNumber} is less than the correct answer, try again. ");
-                } else if (parsedNumber > randomNumber)
+                } else if (parsedNumber > rangedRandomNumber)
                 {
                     Console.Write($"{parsedNumber} is greater than the correct answer, try again. ");
-                } else if (parsedNumber == randomNumber)
+                } else if (parsedNumber == rangedRandomNumber)
                 {
                     Console.Write("Yay, you are correct!");
                 }
