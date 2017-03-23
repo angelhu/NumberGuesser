@@ -20,28 +20,36 @@ namespace NumberGuesser
             Random randomNumber = new Random();
             int rangedRandomNumber = randomNumber.Next(0, 100);
 
-            Console.Write("Please guess a number between 1 and 100: ");
-            string guessedNumber = Console.ReadLine();
-            int parsedNumber = 0;
-            
-            if (int.TryParse(guessedNumber, out parsedNumber))
-            {
-                Console.Write($"You guessed {parsedNumber}. ");
-                if (parsedNumber < rangedRandomNumber)
-                {
-                    Console.Write($"{parsedNumber} is less than the correct answer, try again. ");
-                } else if (parsedNumber > rangedRandomNumber)
-                {
-                    Console.Write($"{parsedNumber} is greater than the correct answer, try again. ");
-                } else if (parsedNumber == rangedRandomNumber)
-                {
-                    Console.Write("Yay, you are correct!");
-                }
-            } else
-            {
-                Console.Write("That is not a valid number. ");
-            }          
+            bool keepGoing = true;
 
+            while (keepGoing)
+            {
+                Console.Write("Please guess a number between 1 and 100: ");
+                string guessedNumber = Console.ReadLine();
+                int parsedNumber = 0;
+
+                if (int.TryParse(guessedNumber, out parsedNumber))
+                {
+                    Console.Write($"You guessed {parsedNumber}. ");
+                    if (parsedNumber < rangedRandomNumber)
+                    {
+                        Console.Write($"{parsedNumber} is less than the correct answer, try again. ");
+                    }
+                    else if (parsedNumber > rangedRandomNumber)
+                    {
+                        Console.Write($"{parsedNumber} is greater than the correct answer, try again. ");
+                    }
+                    else if (parsedNumber == rangedRandomNumber)
+                    {
+                        Console.Write("Yay, you are correct! ");
+                        keepGoing = false;
+                    }
+                }
+                else
+                {
+                    Console.Write("That is not a valid number. ");
+                }
+            }
         }
     }
 }
