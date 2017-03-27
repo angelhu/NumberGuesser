@@ -10,11 +10,20 @@ namespace NumberGuesser
     {
         static void Main(string[] args)
         {
-            
+            TheActualGame();
+        }
+        
+        public static int GenerateNumber()
+        {
             Random randomNumber = new Random();
-            int rangedRandomNumber = randomNumber.Next(1, 101);
+            int generatedNumber = randomNumber.Next(1, 101);
+            return generatedNumber;
+        }
 
-            for(int i = 0; i <5; i++)
+        public static void TheActualGame()
+        {
+            int generatedNumber = GenerateNumber();
+            for (int i = 0; i < 5; i++)
             {
                 Console.Write("Please guess a number between 1 and 100: ");
                 string guessedNumber = Console.ReadLine();
@@ -23,29 +32,28 @@ namespace NumberGuesser
                 if (int.TryParse(guessedNumber, out parsedNumber))
                 {
                     Console.Write($"You guessed {parsedNumber}. ");
-                    if (parsedNumber < rangedRandomNumber)
+                    if (parsedNumber < generatedNumber)
                     {
                         Console.Write($"{parsedNumber} is less than the correct answer, try again. You have {4 - i} chance(s) left. ");
-                        
                     }
-                    else if (parsedNumber > rangedRandomNumber)
+                    else if (parsedNumber > generatedNumber)
                     {
                         Console.Write($"{parsedNumber} is greater than the correct answer, try again. You have {4 - i} chance(s) left. ");
-                        
                     }
-                    else if (parsedNumber == rangedRandomNumber)
+                    else if (parsedNumber == generatedNumber)
                     {
                         Console.Write("Yay, you are correct! ");
                         i = 5;
                     }
-                }
-                else
-                {
-                    Console.Write($"That is not a valid number. You have {4 - i} chance(s) left. ");
-                    
+                    else
+                    {
+                        Console.Write($"That is not a valid number. You have {4 - i} chance(s) left. ");
+                    }
                 }
             }
             Console.WriteLine("You ran out of guesses.");
         }
     }
-} 
+        }
+    
+
