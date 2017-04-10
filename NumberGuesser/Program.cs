@@ -23,6 +23,7 @@ namespace NumberGuesser
         public static void TheActualGame()
         {
             int generatedNumber = GenerateNumber();
+            int[] guesses = new int[5];
             for (int i = 0; i < 5; i++)
             {
                 Console.Write("Please guess a number between 1 and 100: ");
@@ -32,18 +33,22 @@ namespace NumberGuesser
                 if (int.TryParse(guessedNumber, out parsedNumber))
                 {
                     Console.Write($"You guessed {parsedNumber}. ");
+                    guesses[i] = parsedNumber;
                     if (parsedNumber < generatedNumber)
                     {
                         Console.Write($"{parsedNumber} is less than the correct answer, try again. You have {4 - i} chance(s) left. ");
+                       
                     }
                     else if (parsedNumber > generatedNumber)
                     {
                         Console.Write($"{parsedNumber} is greater than the correct answer, try again. You have {4 - i} chance(s) left. ");
+                        
                     }
                     else if (parsedNumber == generatedNumber)
                     {
                         Console.Write("Yay, you are correct! ");
                         i = 5;
+                        
                     }
                     else
                     {
@@ -52,7 +57,14 @@ namespace NumberGuesser
                 }
             }
             Console.WriteLine("You ran out of guesses.");
+            for (int i = 0; i < guesses.Length; i++)
+            {
+                Console.WriteLine($"{i}th element in the array is {guesses[i]}");
+
+            }
+
         }
+           
     }
         }
     
